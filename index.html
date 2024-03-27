@@ -4,10 +4,661 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Vue + TS</title>
+    <title>巨量引擎</title>
+    <style>
+      body {
+        background: #8a98ad;
+        background-attachment: fixed;
+        background-image: url(https://lf3-cdn-tos.bytegoofy.com/goofy/cg/channel_portal_h5/static/assets/5a303c76.agent_bg.png);
+        background-size: cover;
+        background-position: top;
+        background-repeat: no-repeat;
+      }
+      .page-header {
+        align-items: center;
+        background-color: rgba(10, 30, 57, 0.45);
+        display: flex;
+        padding: 10px 16px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+      header.page-header > img {
+        height: 26px;
+        width: auto;
+      }
+      main.main {
+        padding: 0 16px 16px;
+      }
+      main.main > h1 {
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 20px;
+        margin-top: 94px;
+        text-align: center;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      main.main > .search-box {
+        min-height: 64px;
+      }
+      .terminationOfCooperation {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
+        color: #0672ff;
+        cursor: pointer;
+        margin-bottom: 4px;
+      }
+      .terminationOfCooperation img {
+        margin-left: 5px;
+      }
+      main.main > .search-box > .inner-wrapper {
+        align-items: center;
+        display: flex;
+        padding: 12px 0;
+      }
+      main.main > .search-box > .inner-wrapper > #keyword {
+        background-color: hsla(0, 0%, 100%, 0.85);
+        border: 0;
+        border-radius: 4px 0 0 4px;
+        color: rgba(0, 16, 56, 0.85);
+        flex: 1;
+        font-size: 14px;
+        line-height: 40px;
+        padding: 0 16px;
+        outline: none;
+        transition: all 0.3s;
+      }
+      main.main > .search-box > .inner-wrapper > #search-btn {
+        background-color: #2f6aff;
+        background-image: linear-gradient(
+          to top left,
+          #772fff,
+          #2f6aff,
+          #4bf5ff
+        );
+        border: 0;
+        border-radius: 0 4px 4px 0;
+        color: #fff;
+        flex: none;
+        font-size: 15px;
+        line-height: 40px;
+        outline: none;
+        padding: 0;
+        width: 80px;
+        transition: all 0.3s;
+      }
+      main.main > .search-result-initial {
+        font-size: 12px;
+        line-height: 20px;
+        margin-bottom: 28px;
+      }
+      main.main > .search-result {
+        font-size: 14px;
+      }
+      main.main > .search-result .search-result--item:last-child {
+        margin-bottom: 28px;
+      }
+
+      main.main > .search-result .search-result--item:first-child {
+        margin-top: 4px;
+      }
+      main.main > .search-result .search-result--item {
+        font-size: 14px;
+        margin: 16px 0;
+        color: #323335;
+      }
+      main.main > .search-result .search-result--item > h3 {
+        font-size: 14px;
+        margin: 0 0 12px;
+      }
+      main.main
+        > .search-result
+        .search-result--item
+        .search-result--item-content {
+        padding-bottom: 12px;
+        border-bottom: 1px dashed #bfc1c5;
+        margin-bottom: 12px;
+      }
+      main.main
+        > .search-result
+        .search-result--item
+        .search-result--item-content
+        span:first-child {
+        color: #64666b;
+      }
+      main.main
+        > .search-result
+        .search-result--item
+        .search-result--item-content
+        span {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 18px;
+      }
+      main.main
+        > .search-result
+        .search-result--item
+        .search-result--item-content
+        span.agent-type,
+      main.main
+        > .search-result
+        .search-result--item
+        .search-result--item-content
+        span.agent-type
+        span {
+        color: #323335;
+      }
+      main.main
+        > .search-result
+        .search-result--item
+        .search-result--item-content
+        span {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 18px;
+      }
+      main.main
+        > .search-result
+        .search-result--item
+        .search-result--item-content
+        span.agent-type
+        span {
+        color: #323335;
+      }
+      main.main
+        > .search-result
+        .search-result--item
+        .search-result--item-content
+        span:first-child {
+        color: #64666b;
+      }
+      main.main
+        > .search-result
+        .search-result--item
+        .search-result--item-content
+        span {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 18px;
+      }
+      main.main > .search-result .search-result--item__flex > div:first-child {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #64666b;
+        flex: none;
+      }
+      main.main > .search-result .search-result--item__flex > div:last-child {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #323335;
+        flex: 1;
+        word-break: break-all;
+      }
+      main.main
+        > .search-result
+        .search-result--item
+        .search-result--item-content
+        span:first-child {
+        color: #64666b;
+      }
+      main.main
+        > .search-result
+        .search-result--item
+        .search-result--item-content
+        span {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 18px;
+      }
+      main.main
+        > .search-result
+        .search-result--item
+        .search-result--item-content
+        .preview-certificate-btn {
+        display: inline-flex;
+        justify-content: center;
+        border: 0;
+        background: transparent;
+        outline: none;
+        font-weight: 400;
+        font-size: 12px;
+        color: #0672ff;
+        margin: 0 auto;
+        cursor: pointer;
+      }
+      main.main
+        > .search-result
+        .search-result--item
+        .search-result--item-content
+        span {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 18px;
+      }
+      main.main > .search-result .search-result--item .go-awards-btn {
+        display: flex;
+        justify-content: center;
+        border: 0;
+        background: transparent;
+        outline: none;
+        font-weight: 400;
+        font-size: 14px;
+        color: #0672ff;
+        margin: 12px auto 0;
+        cursor: pointer;
+      }
+      main.main
+        > .search-result
+        .search-result--item
+        .go-awards-btn
+        .certificate-icon {
+        width: 18px;
+        height: 18px;
+        margin-top: 1px;
+      }
+      .modal {
+        display: none;
+        vertical-align: middle;
+        position: relative;
+        z-index: 2;
+        max-width: 500px;
+        box-sizing: border-box;
+        width: 90%;
+        background: #fff;
+        padding: 15px 30px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        -o-border-radius: 8px;
+        -ms-border-radius: 8px;
+        border-radius: 8px;
+        -webkit-box-shadow: 0 0 10px #000;
+        -moz-box-shadow: 0 0 10px #000;
+        -o-box-shadow: 0 0 10px #000;
+        -ms-box-shadow: 0 0 10px #000;
+        box-shadow: 0 0 10px #000;
+        text-align: left;
+      }
+      .certificateLoading {
+        height: 40px;
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .certificateLoading span {
+        display: inline-block;
+        width: 8px;
+        height: 20px;
+        border-radius: 4px;
+        -webkit-animation: load 1s ease infinite;
+      }
+      a {
+        text-decoration: none;
+      }
+
+      a:-webkit-any-link {
+        color: -webkit-link;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+      section {
+        display: block;
+      }
+      main.main > section > h2 {
+        font-size: 18px;
+        line-height: 28px;
+        margin: 12px 0;
+      }
+      main.main > .hint--folded > p {
+        height: 66px;
+      }
+
+      main.main > .hint > p {
+        overflow: hidden;
+      }
+
+      main.main > .hint > button {
+        background-color: transparent;
+        border: 0;
+        color: #fff;
+        font-size: 14px;
+        line-height: 22px;
+        margin: 8px 0 0;
+        padding: 0;
+        outline: none;
+      }
+      main.main > .hint > button > img {
+        width: 16px;
+        vertical-align: middle;
+      }
+      main.main > .hint--folded #hint-fold {
+        display: none;
+      }
+      main.main > .search-result > div {
+        background-color: #f4f4f5;
+        border-radius: 8px;
+        margin: 12px 0;
+        padding: 12px;
+      }
+      main.main > .search-result .search-result--item__flex {
+        display: flex;
+      }
+    </style>
   </head>
+
   <body>
-    <div id="app"></div>
-    <script type="module" src="./src/main.ts"></script>
+    <div class="app" id="app">
+      <header class="page-header">
+        <img
+          src="data:image/png;base64,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"
+        />
+      </header>
+      <main class="main">
+        <h1>巨量引擎渠道合作伙伴查询</h1>
+        <section class="search-box">
+          <div class="terminationOfCooperation" id="terminationOfCooperation">
+            了解2023年已终止合作名单
+            <img
+              alt=""
+              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEuMzMwNzMgMS42MjUwOEMxLjMzMDczIDEuNDY0IDEuNDYxMzEgMS4zMzM0MSAxLjYyMjQgMS4zMzM0MUg0LjI0NzRDNC41Njk1NiAxLjMzMzQxIDQuODMwNzMgMS4wNzIyNSA0LjgzMDczIDAuNzUwMDgxQzQuODMwNzMgMC40Mjc5MTUgNC41Njk1NiAwLjE2Njc0OCA0LjI0NzQgMC4xNjY3NDhIMS42MjI0QzAuODE2OTgxIDAuMTY2NzQ4IDAuMTY0MDYyIDAuODE5NjY2IDAuMTY0MDYyIDEuNjI1MDhWMTAuMzc1MUMwLjE2NDA2MiAxMS4xODA1IDAuODE2OTgxIDExLjgzMzQgMS42MjI0IDExLjgzMzRIMTAuMzcyNEMxMS4xNzc4IDExLjgzMzQgMTEuODMwNyAxMS4xODA1IDExLjgzMDcgMTAuMzc1MVY3LjU5NjU3QzExLjgzMDcgNy4yNzQ0MSAxMS41Njk2IDcuMDEzMjQgMTEuMjQ3NCA3LjAxMzI0QzEwLjkyNTIgNy4wMTMyNCAxMC42NjQxIDcuMjc0NDEgMTAuNjY0MSA3LjU5NjU3VjEwLjM3NTFDMTAuNjY0MSAxMC41MzYyIDEwLjUzMzUgMTAuNjY2NyAxMC4zNzI0IDEwLjY2NjdIMS42MjI0QzEuNDYxMzEgMTAuNjY2NyAxLjMzMDczIDEwLjUzNjIgMS4zMzA3MyAxMC4zNzUxVjEuNjI1MDhaIiBmaWxsPSIjMDY3MkZGIi8+CjxwYXRoIGQ9Ik02LjU4MDczIDAuMTY2NzQ4QzYuMjU4NTYgMC4xNjY3NDggNS45OTc0IDAuNDI3OTE1IDUuOTk3NCAwLjc1MDA4MUM1Ljk5NzQgMS4wNzIyNSA2LjI1ODU2IDEuMzMzNDEgNi41ODA3MyAxLjMzMzQxSDkuODM5M0w2LjExMDE1IDUuMDYyNTdDNS44ODIzNCA1LjI5MDM4IDUuODgyMzQgNS42NTk3MyA2LjExMDE1IDUuODg3NTNDNi4zMzc5NSA2LjExNTM0IDYuNzA3MyA2LjExNTM0IDYuOTM1MSA1Ljg4NzUzTDEwLjY2NDEgMi4xNTg1N1Y1LjQxNjc1QzEwLjY2NDEgNS43Mzg5MSAxMC45MjUyIDYuMDAwMDggMTEuMjQ3NCA2LjAwMDA4QzExLjU2OTYgNi4wMDAwOCAxMS44MzA3IDUuNzM4OTEgMTEuODMwNyA1LjQxNjc1VjAuNzUwMDgxQzExLjgzMDcgMC40Mjc5MTUgMTEuNTY5NiAwLjE2Njc0OCAxMS4yNDc0IDAuMTY2NzQ4SDYuNTgwNzNaIiBmaWxsPSIjMDY3MkZGIi8+Cjwvc3ZnPgo="
+            />
+          </div>
+          <div class="inner-wrapper">
+            <input id="keyword" placeholder="将至已至（北京）网络科技有限公司" value="" />
+            <button id="search-btn">查询</button>
+          </div>
+        </section>
+        <section
+          class="search-result-initial"
+          style="margin-bottom: 0px"
+        ></section>
+        <section class="search-result">
+          <div class="search-result--item">
+            <h3>将至已至（北京）网络科技有限公司</h3>
+            <div>
+              <div class="search-result--item-content">
+                <div>
+                  <span>合作属性：</span>
+                  <span class="agent-type">
+                    <span>巨量本地推综合代理商</span>
+                  </span>
+                </div>
+                <div class="search-result--item__flex">
+                  <div>代理范围：</div>
+                  <div>
+                    全国地区内除本地行业优势代理范围、汽车厂商、汽车经销商、房地产开发商行业外
+                  </div>
+                </div>
+                <div>
+                  <span>认证证书：</span>
+                  <span
+                    data-companyname="广州微圈传媒有限公司"
+                    data-licenseid="1241057303170368"
+                    class="preview-certificate-btn"
+                    >查看证书</span
+                  >
+                </div>
+              </div>
+
+              <div class="search-result--item-content">
+                <div>
+                  <span>合作属性：</span>
+                  <span class="agent-type">
+                    <span>巨量引擎综合代理商</span>
+                  </span>
+                </div>
+                <div class="search-result--item__flex">
+                  <div>代理范围：</div>
+                  <div>
+                    全国地区内除本地行业优势代理范围、汽车厂商、汽车经销商、房地产开发商行业外
+                  </div>
+                </div>
+                <div>
+                  <span>认证证书：</span>
+                  <span
+                    data-companyname="广州微圈传媒有限公司"
+                    data-licenseid="861246064170203"
+                    class="preview-certificate-btn"
+                    >查看证书</span
+                  >
+                </div>
+              </div>
+
+              <div class="search-result--item-content">
+                <div>
+                  <span>合作属性：</span>
+                  <span class="agent-type">
+                    <span>巨量千川服务商</span>
+                  </span>
+                </div>
+                <div class="search-result--item__flex">
+                  <div>认证赛道：</div>
+                  <div>品牌赛道</div>
+                </div>
+                <div class="search-result--item__flex">
+                  <div>认证行业：</div>
+                  <div>消费品</div>
+                </div>
+                <div>
+                  <span>认证星级：</span>
+                  <span>二星级</span>
+                </div>
+                <div class="search-result--item__flex">
+                  <div>服务范围：</div>
+                  <div>
+                    全国范围内汽车厂商、汽车经销商、房地产开发商（一手房）行业以外的客户
+                  </div>
+                </div>
+                <div>
+                  <span>认证证书：</span>
+                  <span
+                    data-companyname="广州微圈传媒有限公司"
+                    data-licenseid="1880933430170203"
+                    class="preview-certificate-btn"
+                    >查看证书</span
+                  >
+                </div>
+              </div>
+
+              <div class="search-result--item-content">
+                <div>
+                  <span>合作属性：</span>
+                  <span class="agent-type">
+                    <span>营销科学服务商</span>
+                  </span>
+                </div>
+                <div>
+                  <span>认证专业：</span>
+                  <span>策投一体</span>
+                </div>
+                <div class="search-result--item__flex">
+                  <div>认证行业：</div>
+                  <div>日化母婴</div>
+                </div>
+                <div>
+                  <span>认证等级：</span>
+                  <span>初级认证</span>
+                </div>
+                <div>
+                  <span>认证证书：</span>
+                  <span
+                    data-companyname="广州微圈传媒有限公司"
+                    data-licenseid="962879115168417"
+                    class="preview-certificate-btn"
+                    >查看证书</span
+                  >
+                </div>
+              </div>
+
+              <div class="search-result--item-content">
+                <div>
+                  <span>合作属性：</span>
+                  <span class="agent-type">
+                    <span>营销科学服务商</span>
+                  </span>
+                </div>
+                <div>
+                  <span>认证专业：</span>
+                  <span>策投一体</span>
+                </div>
+                <div class="search-result--item__flex">
+                  <div>认证行业：</div>
+                  <div>教育</div>
+                </div>
+                <div>
+                  <span>认证等级：</span>
+                  <span>初级认证</span>
+                </div>
+                <div>
+                  <span>认证证书：</span>
+                  <span
+                    data-companyname="广州微圈传媒有限公司"
+                    data-licenseid="1757268781170469"
+                    class="preview-certificate-btn"
+                    >查看证书</span
+                  >
+                </div>
+              </div>
+
+              <div class="search-result--item-content">
+                <div>
+                  <span>合作属性：</span>
+                  <span class="agent-type">
+                    <span>营销科学服务商</span>
+                  </span>
+                </div>
+                <div>
+                  <span>认证专业：</span>
+                  <span>策投一体</span>
+                </div>
+                <div class="search-result--item__flex">
+                  <div>认证行业：</div>
+                  <div>美妆奢品</div>
+                </div>
+                <div>
+                  <span>认证等级：</span>
+                  <span>初级认证</span>
+                </div>
+                <div>
+                  <span>认证证书：</span>
+                  <span
+                    data-companyname="广州微圈传媒有限公司"
+                    data-licenseid="307999554169706"
+                    class="preview-certificate-btn"
+                    >查看证书</span
+                  >
+                </div>
+              </div>
+
+              <div class="search-result--item-content">
+                <div>
+                  <span>合作属性：</span>
+                  <span class="agent-type">
+                    <span>营销科学服务商</span>
+                  </span>
+                </div>
+                <div>
+                  <span>认证专业：</span>
+                  <span>策投一体</span>
+                </div>
+                <div class="search-result--item__flex">
+                  <div>认证行业：</div>
+                  <div>服装饰品</div>
+                </div>
+                <div>
+                  <span>认证等级：</span>
+                  <span>初级认证</span>
+                </div>
+                <div>
+                  <span>认证证书：</span>
+                  <span
+                    data-companyname="广州微圈传媒有限公司"
+                    data-licenseid="1573780483169706"
+                    class="preview-certificate-btn"
+                    >查看证书</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <button
+              data-companyname="广州微圈传媒有限公司"
+              class="go-awards-btn"
+            >
+              <img
+                alt="certificate"
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjEiIHZpZXdCb3g9IjAgMCA2MCA2MSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzE1NTQyXzc2OTIyKSI+CjxwYXRoIGQ9Ik02MCAwLjVIMFY2MC41SDYwVjAuNVoiIGZpbGw9IndoaXRlIiBmaWxsLW9wYWNpdHk9IjAuMDEiLz4KPHBhdGggZD0iTTI4Ljg3OTUgMjYuNTIxMUMyOS4zMzggMjUuNTkxOSAzMC42NjI4IDI1LjU5MTkgMzEuMTIxMyAyNi41MjExTDM0Ljg1MjYgMzQuMDgxNkMzNS4wMzQ4IDM0LjQ1MDYgMzUuMzg2OCAzNC43MDYzIDM1Ljc5MzkgMzQuNzY1NEw0NC4xMzc0IDM1Ljk3NzhDNDUuMTYyNyAzNi4xMjY4IDQ1LjU3MjIgMzcuMzg2OCA0NC44MzAyIDM4LjEwOTlMMzguNzkyOCA0My45OTUxQzM4LjQ5ODEgNDQuMjgyMiAzOC4zNjM2IDQ0LjY5NTkgMzguNDMzMyA0NS4xMDE0TDM5Ljg1ODUgNTMuNDExM0M0MC4wMzM2IDU0LjQzMjQgMzguOTYxOCA1NS4yMTExIDM4LjA0NDggNTQuNzI5MUwzMC41ODIgNTAuODA1NkMzMC4yMTc5IDUwLjYxNDIgMjkuNzgyOSA1MC42MTQyIDI5LjQxODggNTAuODA1NkwyMS45NTYgNTQuNzI5MUMyMS4wMzkgNTUuMjExMSAxOS45NjcxIDU0LjQzMjQgMjAuMTQyMyA1My40MTEzTDIxLjU2NzUgNDUuMTAxNEMyMS42MzcxIDQ0LjY5NTkgMjEuNTAyNiA0NC4yODIyIDIxLjIwOCA0My45OTUxTDE1LjE3MDYgMzguMTA5OUMxNC40Mjg2IDM3LjM4NjggMTQuODM4MSAzNi4xMjY4IDE1Ljg2MzQgMzUuOTc3OEwyNC4yMDY5IDM0Ljc2NTRDMjQuNjE0IDM0LjcwNjMgMjQuOTY2IDM0LjQ1MDYgMjUuMTQ4MSAzNC4wODE2TDI4Ljg3OTUgMjYuNTIxMVoiIHN0cm9rZT0iIzA2NzJGRiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTQ1IDUuNDk5NTFIMTVWMTcuOTk5NUwzMCAyNC4yNDk1TDQ1IDE3Ljk5OTVWNS40OTk1MVoiIHN0cm9rZT0iIzA2NzJGRiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9nPgo8ZGVmcz4KPGNsaXBQYXRoIGlkPSJjbGlwMF8xNTU0Ml83NjkyMiI+CjxyZWN0IHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgZmlsbD0id2hpdGUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMC41KSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPgo="
+                class="certificate-icon"
+              />
+              <span>共擎奖获奖信息</span>
+            </button>
+          </div>
+        </section>
+
+        <div id="certificateModal" class="modal certificate-modal">
+          <div class="certificateLoading">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <img id="certificateImg" width="100%" alt="证书加载失败" />
+          <a
+            href="#close-modal"
+            rel="modal:close"
+            class="close-certificate-modal"
+          ></a>
+        </div>
+
+        <section class="hint hint--folded">
+          <h2>合作提示</h2>
+          <p>
+            特别提示，需关注合作伙伴不同合作属性的合作有效期，请您阅读并理解巨量引擎渠道合作伙伴的含义：
+            <br /><br />
+            代理商：指有权经营巨量引擎广告投放平台（https://ad.oceanengine.com）内互联网广告销售业务的合作代理商，分为综合代理商和本地行业优势代理商。
+            <br />
+            巨量千川服务商：指有权经营巨量千川平台（https://qianchuan.jinritemai.com/）内互联网广告销售业务的合作服务商，结合服务商的规模、服务能力等综合判断评估认证星级。
+            <br />
+            广告运营商：指基于客户在创意、数据、技术、直播等方面的需求，可为客户提供多元的选择而引入的第三方服务机构。
+            <br />
+            巨量星图代理商：指有权在巨量星图平台（https://www.xingtu.cn）进行内容营销策略输出与达人采买的新媒体KOL合作机构。巨量星图代理商致力于以技术和创意为驱动，为品牌提供一站式线上线下达人营销解决方案，助力品牌声量打造与生意增长。
+            <br />
+            巨量引擎营销科学服务商：指营销科学服务生态内成功入驻及认证的服务伙伴，巨量引擎营销科学服务商致力于帮助品牌结合营销科学方法论解决业务中的痛点和难题，通过巨量云图等营销数据产品的精细化运营实现「品效销」联动和生意可持续增长。
+            <br />
+            图虫代理商：指由中国销售业务平台-渠道销售管理中心开拓和管理的，与巨量引擎及其关联公司（上海图虫网络科技有限公司）存在合作关系（即签署了《图虫代理商推广合作协议》）的代理商。
+            <br />
+            平台结合合作伙伴与巨量引擎的合作情况会展示不同样式的电子证书。
+            <br />
+            您需要自行判断是否选择由合作伙伴提供相应服务，如需选择合作伙伴进行交易，请核实合作伙伴资质、信誉、能力，知晓服务具体内容、收费标准、服务期限、违约责任等重要交易条款，谨慎交易。
+            <br />
+            巨量引擎不对合作伙伴服务的安全性、准确性、有效性等承担任何担保或承诺。
+            <br />
+            投诉举报 channel-jiancha@bytedance.com
+          </p>
+          <button id="hint-expand">
+            <span>展开详情</span>
+            <img
+              alt="down"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgBAMAAAAQtmoLAAAAFVBMVEX///////////////////////////9nSIHRAAAABnRSTlMD8DiuKDlEJ6PkAAAA40lEQVRYw+3UsQ3CQBBEUYSgAQMX2yWQEEMHUIKFtP2XgETygznfbAw7GcZzz3Ywu0ql8qs5XE/3xHXyiLjwi7wizt3CLWJ96uVji3h3Cy0ipi4Q62YBAoCCPFKPWCJ4JHnpLyHA1kvvGwSAnCJ/znIIX9sTAJ7QIzzBCYawgBLa94QClqDtCQUMIYAlBPAEQI4ASBIASQIgSQAMdwkCYLRLEwTAMtqlGYL6cJcgaA92iZsom13iLrqDXeI2qm6X+JS1S7VLtUuyS1kCIE8AeCIPyC4lCYAsAZAlFPDTX6lU/iAfXO3Re+kwi2QAAAAASUVORK5CYII="
+            />
+          </button>
+          <button id="hint-fold">
+            <span>收起详情</span>
+            <img
+              alt="up"
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgBAMAAAAQtmoLAAAAFVBMVEX///////////////////////////9nSIHRAAAABnRSTlMD8DiuKDlEJ6PkAAAA40lEQVRYw+3UsQ3CQBBEUYSgAQMX2yWQEEMHUIKFtP2XgETygznfbAw7GcZzz3Ywu0ql8qs5XE/3xHXyiLjwi7wizt3CLWJ96uVji3h3Cy0ipi4Q62YBAoCCPFKPWCJ4JHnpLyHA1kvvGwSAnCJ/znIIX9sTAJ7QIzzBCYawgBLa94QClqDtCQUMIYAlBPAEQI4ASBIASQIgSQAMdwkCYLRLEwTAMtqlGYL6cJcgaA92iZsom13iLrqDXeI2qm6X+JS1S7VLtUuyS1kCIE8AeCIPyC4lCYAsAZAlFPDTX6lU/iAfXO3Re+kwi2QAAAAASUVORK5CYII="
+            />
+          </button>
+        </section>
+      </main>
+    </div>
+    <!-- <script type="module" src="./src/main.ts"></script> -->
   </body>
 </html>
